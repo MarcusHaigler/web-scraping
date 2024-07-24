@@ -1,6 +1,6 @@
 from urllib.request import urlopen
 from googlesearch import search
-import urllib.robotparser as urobot
+import urllib.robotparser as urlbot
 import urllib.request
 from bs4 import BeautifulSoup
 import os
@@ -15,17 +15,22 @@ def google_search(query):
          print("all urls fetched")
 
 def check_robots(url): # check robots.txt
-   global url_robot
-   global l
-   for i in url: # read trhu url and find the end of the domain
-      if url.index(i, i+3) != ".com":
+   end = '/'
+   robot_url = ""
+   for i in url: # read thru url and find the end of the domain
+      if url.index(i) != end:
          pass
       else:
-         l = url.index(0,i+3)
-         url_robot = url.index(0,i+3) # save as variable
-         print(f"robots.txt found at {url_robot}")
-   # read txt file and find look for the value    
-      
+         robot_url = url.index(0,i) + '/robots.txt'
+         print(f"robot.txt: {robot.url}")
+# read txt file and find look for the value    
+   urlbot.RobotFileParser()
+   urlbot.set_url(robot_url)
+   urlbot.read()
+   if urlbot.can_fetch("*", url):
+      return True
+   else:
+      return False
 urls = []
 search_query = "cats" # make this an input for final version
 
@@ -33,4 +38,6 @@ google_search(search_query)
 print(urls) # for testing
 
 for url in urls:
-   check_robots(url)
+   if check_robots(url) is 
+   
+   
