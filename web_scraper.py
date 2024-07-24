@@ -34,10 +34,13 @@ def check_robots(url): # check robots.txt
 urls = []
 search_query = "cats" # make this an input for final version
 
+### START OF PROGRAM ###
 google_search(search_query)
 print(urls) # for testing
 
 for url in urls:
-   if check_robots(url) is 
-   
-   
+   if check_robots(url) is True:
+      pass
+   else:
+      # remove url from list
+      
