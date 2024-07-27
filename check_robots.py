@@ -15,7 +15,18 @@ def check_robots(url): # check robots.txt
    can_fetch_status = False
 
 # read thru url and find the end of the domain
-    
+  
+   # test to make sure every letter is read 
+   # for i in url:
+      # print(i)
+      
+   # compare every letter to end
+      # if i =! end
+         # print(invalid)
+      # else:
+         # print(valid)
+         
+   
       
 
 # read txt file for general rules   
