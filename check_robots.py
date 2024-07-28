@@ -7,6 +7,11 @@ import os
 
 sample_urls = ['https://www.imdb.com/title/tt5697572/', 'https://www.reddit.com/r/cats/', 'https://www.imdb.com/title/tt5697572/', 'https://www.imdb.com/title/tt5697572/', 'https://www.imdb.com/title/tt5697572/']
 
+def scan_url(url);
+# test to make sure every letter is read 
+  for i in url:
+    print(i)
+
 def check_robots(url): # check robots.txt
    os.system("cls||clear")
    print(f'checking robots for {url}')
@@ -14,21 +19,12 @@ def check_robots(url): # check robots.txt
    robot_url = ""
    can_fetch_status = False
 
-# read thru url and find the end of the domain
-  
-   # test to make sure every letter is read 
-   # for i in url:
-      # print(i)
-      
    # compare every letter to end
-      # if i =! end
-         # print(invalid)
-      # else:
-         # print(valid)
+  if scan_url(url) =! end
+    print(invalid)
+  else:
+    print(valid)
          
-   
-      
-
 # read txt file for general rules   
    urlbot = urllib.robotparser.RobotFileParser()
    urlbot.set_url(robot_url)
