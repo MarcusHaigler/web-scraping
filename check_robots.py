@@ -7,23 +7,25 @@ import os
 
 sample_urls = ['https://www.imdb.com/title/tt5697572/', 'https://www.reddit.com/r/cats/', 'https://www.imdb.com/title/tt5697572/', 'https://www.imdb.com/title/tt5697572/', 'https://www.imdb.com/title/tt5697572/']
 
-def scan_url(url);
-# test to make sure every letter is read 
-  for i in url:
-    print(i)
+def scan_url(word, end_value);
+# take off the https part of the url here
 
+# loop thru the rest of the url and find the end value
+  for i in word:
+    print(i)
+    if i != end_value:
+      print("False")
+    else:
+      print("True")
+    
 def check_robots(url): # check robots.txt
    os.system("cls||clear")
    print(f'checking robots for {url}')
    end = '/'
    robot_url = ""
    can_fetch_status = False
-
-   # compare every letter to end
-  if scan_url(url) =! end
-    print(invalid)
-  else:
-    print(valid)
+  
+# integrate scan_url here to find the end of the url homepage
          
 # read txt file for general rules   
    urlbot = urllib.robotparser.RobotFileParser()
