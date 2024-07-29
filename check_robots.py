@@ -25,18 +25,17 @@ def get_home_page(word):
     
 def check_robots(url_list): # check robots.txt for permission
    os.system("cls||clear")
-   
-   print(f'checking robots for {url}')
-   robot_url = ""
-   can_fetch_status = False
+   for url in url_list:   
+    print(f'checking robots for {url}')
+    robot_url = ""
+    can_fetch_status = False
   
-# integrate get_home_page here to find the end of the url homepage
-   if get_home_page(url) is False:
-    print("url capture failed")
-    
-   else:
-    print("url capture successful")
-    robot_url = get_home_page(url)
+    if get_home_page(url) is False:
+        print("url capture failed")
+        break
+    else:
+        print("url capture successful")
+        robot_url = get_home_page(url)
     
     # read txt file for general rules   
     urlbot = urllib.robotparser.RobotFileParser()
