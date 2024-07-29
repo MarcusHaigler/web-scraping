@@ -18,44 +18,34 @@ def get_home_page(word):
       pass
     else:
       captured_url = hp[:i]
-
       return captured_url
     
     return False
     
 def check_robots(url_list): # check robots.txt for permission
-   os.system("cls||clear")
-   
-   print(f'checking robots for {url}')
-   robot_url = ""
-   can_fetch_status = False
-  
-# integrate get_home_page here to find the end of the url homepage
-   if get_home_page(url) is False:
-    print("url capture failed")
-    
-   else:
-    print("url capture successful")
-    robot_url = get_home_page(url)
-    
-    # read txt file for general rules   
-    urlbot = urllib.robotparser.RobotFileParser()
-    urlbot.set_url(robot_url)
-    urlbot.read()
-    if urlbot.can_fetch("*", url):
-        can_fetch_status =  True
+  os.system("cls||clear")
+# loop thru list 
+  for url in url_list:
+    print(f'checking robots for {url}')
+    robot_url = ""
+    can_fetch_status = False
+# pull homepage url  
+    if get_home_page(url) is False:
+      print("url capture failed")
+      break
     else:
-        can_fetch_status =  False
-    
-    return can_fetch_status
+      print("url capture successful")
+      robot_url = get_home_page(url)
+# read robots.txt file for general rules   
+      urlbot = urllib.robotparser.RobotFileParser()
+      urlbot.set_url(robot_url)
+      urlbot.read()
+# if it allows bots, keep in list, if not, remove it
+      if urlbot.can_fetch("*", url):
+        pass
+      else:
+        url_list.remove(url)
+# return modified list
+  return url_list
 
-for url in sample_urls: # remove all websites that dont allow web scraping
-   if check_robots(url) is True:
-      pass
-   else:
-      # remove url from list
-      sample_urls.remove(url)
-
-# test point
-print(f"usable urls:")
-print(sample_urls)
+check_robots(sample_urls)
