@@ -9,22 +9,17 @@ sample_urls = ['https://www.imdb.com/title/tt5697572/', 'https://www.reddit.com/
 
 sample = 'https://www.imdb.com/title/tt5697572/'
 
-def get_home_page(url):
-  hp = url[12:] # cut off the 'https://www.'
-  end_value = '/' # the end of the url name
-  captured_url = ""
-# loop thru the rest of the url and find the end value
-  print(f"full url: {url}")
-  for h in hp:
-    print(h)
-    if h != end_value:
-      pass
-    else:
-      captured_url = hp[:h]
-      return captured_url
-    
-    return False
-    
+def get_robots(link):
+  url = link[12:]
+  end_value = '/'
+  robots_link = ""
+
+  for l in url:
+    if l is end_value:
+      end = url.index(l)
+      robots_link = "https://" + url[:end] + "/robots.txt"
+      return robots_link
+
 def check_robots(url_list): # check robots.txt for permission
   os.system("cls||clear")
 # loop thru list 
@@ -32,12 +27,12 @@ def check_robots(url_list): # check robots.txt for permission
     print(f'checking robots for {url}')
     robot_url = ""
 # pull homepage url  
-    if get_home_page(url) is False:
+    if get_robots(url) is False:
       print("url capture failed")
       break
     else:
       print("url capture successful")
-      robot_url = get_home_page(url)
+      robot_url = get_robots(url)
 # read robots.txt file for general rules   
       urlbot = urllib.robotparser.RobotFileParser()
       urlbot.set_url(robot_url)
@@ -50,4 +45,4 @@ def check_robots(url_list): # check robots.txt for permission
 # return modified list
   return url_list
 
-get_home_page(sample)
+print(check_robots(sample_urls))

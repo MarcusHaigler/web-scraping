@@ -20,28 +20,48 @@ def google_search(query):
       if len(urls) == 5:
          print("all urls fetched")
 
-def check_robots(url): # check robots.txt
-   os.system("cls||clear")
-   print('checking robots for {ur}')
-   end = '/'
-   robot_url = ""
-   can_fetch_status = False
-   for i in url: # read thru url and find the end of the domain
-      if url.index(i) != end:
-         pass
+from urllib.request import urlopen
+from googlesearch import search
+import urllib.robotparser
+import os
+
+sample_urls = ['https://www.imdb.com/title/tt5697572/', 'https://www.reddit.com/r/cats/', 'https://www.imdb.com/title/tt5697572/', 'https://www.imdb.com/title/tt5697572/', 'https://www.imdb.com/title/tt5697572/']
+
+sample = 'https://www.imdb.com/title/tt5697572/'
+
+def get_robots(link):
+  url = link[12:]
+  end_value = '/'
+  robots_link = ""
+
+  for l in url:
+    if l is end_value:
+      end = url.index(l)
+      robots_link = "https://" + url[:end] + "/robots.txt"
+      return robots_link
+
+def check_robots(url_list): # check robots.txt for permissions
+  for url in url_list:
+    print(f'checking robots for {url}')
+    robot_url = ""
+# pull homepage url  
+    if get_robots(url) is False:
+      print("url capture failed")
+      break
+    else:
+      print("url capture successful")
+      robot_url = get_robots(url)
+# read robots.txt file for general rules   
+      urlbot = urllib.robotparser.RobotFileParser()
+      urlbot.set_url(robot_url)
+      urlbot.read()
+# if it allows bots, keep in list, if not, remove it
+      if urlbot.can_fetch("*", url):
+        pass
       else:
-         robot_url = url.index(0,i) + 'robots.txt'
-         print(f"robot.txt: {robot_url}")
-# read txt file for general rules   
-   urlbot.RobotFileParser()
-   urlbot.set_url(robot_url)
-   urlbot.read()
-   if urlbot.can_fetch("*", url):
-      can_fetch_status =  True
-   else:
-      can_fetch_status =  False
-   
-   return can_fetch_status
+        url_list.remove(url)
+# return modified list
+  return url_list
 
 def scrape_page(url):
    pass
